@@ -1,0 +1,19 @@
+package-as: AdiBags - Dragonflight Crafting
+enable-nolib-creation: no
+
+move-folders:
+    AdiBags_DFCrafting/AdiBags_DFCrafting: AdiBags_DFCrafting
+
+manual-changelog:
+    filename: CHANGELOG.md
+    markup-type: markdown
+
+license-output: LICENSE.txt
+
+ignore:
+    - CHANGELOG.md
+    - README.md
+    - LICENSE
+    - .editorconfig
+    - .github
+    
