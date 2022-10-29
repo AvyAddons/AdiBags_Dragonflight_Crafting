@@ -26,7 +26,7 @@
 --]]
 -- Retrive addon folder name, and our local, private namespace.
 local Addon, Private = ...
-
+local L = Private.L
 
 -- Lua API
 -----------------------------------------------------------
@@ -37,66 +37,15 @@ local ipairs = ipairs
 -----------------------------------------------------------
 -- Upvalue any WoW functions used here.
 
-
--- Localization system.
------------------------------------------------------------
--- Do not modify the function,
--- just the locales in the table below!
-local L = (function(tbl, defaultLocale)
-	local gameLocale = GetLocale() -- The locale currently used by the game client.
-	local L = tbl[gameLocale] or tbl[defaultLocale] -- Get the localization for the current locale, or use your default.
-	-- Replace the boolean 'true' with the key,
-	-- to simplify locale creation and reduce space needed.
-	for i in pairs(L) do
-		if (L[i] == true) then
-			L[i] = i
-		end
-	end
-	-- If the game client is in another locale than your default,
-	-- fill in any missing localization in the client's locale
-	-- with entries from your default locale.
-	if (gameLocale ~= defaultLocale) then
-		for i, msg in pairs(tbl[defaultLocale]) do
-			if (not L[i]) then
-				-- Replace the boolean 'true' with the key,
-				-- to simplify locale creation and reduce space needed.
-				L[i] = (msg == true) and i or msg
-			end
-		end
-	end
-	return L
-end)({
-	-- ENTER YOUR LOCALIZATION HERE!
-	-----------------------------------------------------------
-	-- * Note that you MUST include a full table for your primary/default locale!
-	-- * Entries where the value (to the right) is the boolean 'true',
-	--   will use the key (to the left) as the value instead!
-	["enUS"] = {
-		[Private.filterName] = true,
-		["Categories for all Dragonflight Crafting items and reagents."] = true,
-	},
-	["deDE"] = {},
-	["esES"] = {},
-	["esMX"] = {},
-	["frFR"] = {},
-	["itIT"] = {},
-	["koKR"] = {},
-	["ptPT"] = {},
-	["ruRU"] = {},
-	["zhCN"] = {},
-	["zhTW"] = {}
-
-	-- The primary/default locale of your addon.
-	-- * You should change this code to your default locale.
-	-- * Note that you MUST include a full table for your primary/default locale!
-}, "enUS")
-
-
 -- Callbacks
 -----------------------------------------------------------
 local function enableIds(dict, id_list)
-	for _, v in ipairs(id_list) do
-		dict[v] = true
+	--@debug@
+	assert(id_list["items"], "Items list not found")
+	assert(id_list["name"], "Category name not found")
+	--@debug@
+	for _, v in ipairs(id_list.items) do
+		dict[v] = L[id_list.name]
 	end
 end
 
@@ -111,8 +60,8 @@ local AdiBags = LibStub("AceAddon-3.0"):GetAddon("AdiBags")
 
 -- Filter Registration
 -----------------------------------------------------------
-local filter = AdiBags:RegisterFilter(FILTER_NAME, 90, "ABEvent-1.0")
-filter.uiName = L[FILTER_NAME]
+local filter = AdiBags:RegisterFilter("Dragonflight Crafting", 90, "ABEvent-1.0")
+filter.uiName = L["Dragonflight Crafting"]
 filter.uiDesc = L["Categories for all Dragonflight Crafting items and reagents."]
 
 function filter:OnInitialize()
@@ -120,11 +69,33 @@ function filter:OnInitialize()
 	self.db = AdiBags.db:RegisterNamespace(self.filterName, {
 		profile = {
 			-- Add your settings here
+			move_alchemy = true,
+			move_cloth = true,
+			move_cooking = true,
+			split_tuskarr_feast = false,
+			split_ingredients = false,
+			split_meat = false,
+			split_fish = false,
+			split_reagents = false,
+			move_enchanting = true,
+			move_herbs = true,
+			move_inscription = true,
+			move_jewelcrafting = true,
+			move_leather = true,
+			move_ore_stone = true,
+			move_parts = true,
+			move_darkmoon_cards = false,
+			move_reagents = true,
+			move_crafting = true,
+			move_treasure_sack = false,
+			move_fortune_card = false,
 		},
 	})
 end
 
 function filter:Update()
+	-- Reset filtered IDs
+	CacheIds = nil
 	-- Notify myself that the filtering options have changed
 	self:SendMessage("AdiBags_FiltersChanged")
 end
@@ -141,10 +112,91 @@ end
 -----------------------------------------------------------
 function filter:Filter(slotData)
 	local itemId = slotData.itemId
+	CacheIds = CacheIds or self:StartCache()
 
-	if (itemId and Cache[itemId]) then
-		return Cache[itemId]
+	if (itemId and CacheIds[itemId]) then
+		return CacheIds[itemId]
 	end
+end
+
+function filter:StartCache()
+	wipe(CacheIds)
+
+	if self.db.profile.move_alchemy then
+		enableIds(CacheIds, Database.alchemy)
+	end
+	if self.db.profile.move_cloth then
+		enableIds(CacheIds, Database.cloth)
+	end
+	if self.db.profile.move_cooking then
+		local cooking_ignores = {}
+
+		if self.db.profile.split_tuskarr_feast then
+			enableIds(CacheIds, Database.tuskarr_feast)
+			cooking_ignores["tuskarr_feast"] = true
+		end
+		if self.db.profile.split_ingredients then
+			enableIds(CacheIds, Database.ingredients)
+			cooking_ignores["ingredients"] = true
+		end
+		if self.db.profile.split_meat then
+			enableIds(CacheIds, Database.meat)
+			cooking_ignores["meat"] = true
+		end
+		if self.db.profile.split_fish then
+			enableIds(CacheIds, Database.fish)
+			cooking_ignores["fish"] = true
+		end
+		if self.db.profile.split_reagents then
+			enableIds(CacheIds, Database.reagents)
+			cooking_ignores["reagents"] = true
+		end
+
+		for i, v in ipairs(Database.cooking) do
+			if not cooking_ignores[i] then
+				enableIds(CacheIds, v)
+			end
+		end
+		wipe(cooking_ignores)
+	end
+	if self.db.profile.move_enchanting then
+		enableIds(CacheIds, Database.enchanting)
+	end
+	if self.db.profile.move_herbs then
+		enableIds(CacheIds, Database.herbs)
+	end
+	if self.db.profile.move_inscription then
+		enableIds(CacheIds, Database.inscription)
+	end
+	if self.db.profile.move_jewelcrafting then
+		enableIds(CacheIds, Database.jewelcrafting)
+	end
+	if self.db.profile.move_leather then
+		enableIds(CacheIds, Database.leather)
+	end
+	if self.db.profile.move_ore_stone then
+		enableIds(CacheIds, Database.ore_stone)
+	end
+	if self.db.profile.move_parts then
+		enableIds(CacheIds, Database.parts)
+	end
+	if self.db.profile.move_darkmoon_cards then
+		enableIds(CacheIds, Database.darkmoon_cards)
+	end
+	if self.db.profile.move_reagents then
+		enableIds(CacheIds, Database.reagents)
+	end
+	if self.db.profile.move_crafting then
+		enableIds(CacheIds, Database.crafting)
+	end
+	if self.db.profile.move_treasure_sack then
+		enableIds(CacheIds, Database.treasure_sack)
+	end
+	if self.db.profile.move_fortune_card then
+		enableIds(CacheIds, Database.fortune_card)
+	end
+
+	return CacheIds
 end
 
 -- Filter Options Panel
@@ -155,7 +207,6 @@ function filter:GetOptions()
 	}, AdiBags:GetOptionHandler(self, true, function() return self:Update() end)
 end
 
------------------------------------------------------------
 -- Setup the environment
 -----------------------------------------------------------
 (function(self)
