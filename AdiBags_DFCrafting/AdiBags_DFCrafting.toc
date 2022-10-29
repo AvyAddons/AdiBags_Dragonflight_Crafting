@@ -18,8 +18,9 @@
 ## X-Curse-Project-ID: 694788
 ## X-Wago-ID: 7x61bvK1
 
-Main.lua
 Database.lua
+Localization.lua
+Main.lua
 
 #@debug@
 ## Version: DEV
