@@ -1,4 +1,4 @@
-package-as: AdiBags - Dragonflight Crafting
+package-as: AdiBags_DFCrafting
 enable-nolib-creation: no
 
 move-folders:
@@ -16,4 +16,3 @@ ignore:
     - LICENSE
     - .editorconfig
     - .github
-    
