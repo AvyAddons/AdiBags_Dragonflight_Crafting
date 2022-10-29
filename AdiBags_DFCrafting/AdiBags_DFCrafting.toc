@@ -1,0 +1,26 @@
+## Interface: 100000
+
+## Title: AdiBags_DFCrafting
+## Notes: Filters for Dragonflight Crafting categories in AdiBags. 
+## Author: Avyiel
+## Version: @project-version@
+
+## DefaultState: Enabled
+## Dependencies: AdiBags
+#@alpha@
+## OptionalDeps: BugSack, BugGrabber
+#@end-alpha@
+
+## X-Date: @project-date-iso@
+## X-Category: Bags & Inventory
+## X-License: MIT
+
+## X-Curse-Project-ID: 694788
+## X-Wago-ID: 7x61bvK1
+
+Main.lua
+Database.lua
+
+#@debug@
+## Version: DEV
+#@end-debug@
