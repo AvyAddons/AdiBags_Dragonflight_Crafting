@@ -42,10 +42,10 @@ local ipairs = ipairs
 local function enableIds(dict, id_list)
 	--@debug@
 	assert(id_list["items"], "Items list not found")
-	assert(id_list["name"], "Category name not found")
+	assert(id_list["category"], "Category name not found")
 	--@debug@
 	for _, v in ipairs(id_list.items) do
-		dict[v] = L[id_list.name]
+		dict[v] = L[id_list.category]
 	end
 end
 
@@ -132,29 +132,32 @@ function filter:StartCache()
 		local cooking_ignores = {}
 
 		if self.db.profile.split_tuskarr_feast then
-			enableIds(CacheIds, Database.tuskarr_feast)
+			enableIds(CacheIds, Database.cooking.tuskarr_feast)
 			cooking_ignores["tuskarr_feast"] = true
 		end
 		if self.db.profile.split_ingredients then
-			enableIds(CacheIds, Database.ingredients)
+			enableIds(CacheIds, Database.cooking.ingredients)
 			cooking_ignores["ingredients"] = true
 		end
 		if self.db.profile.split_meat then
-			enableIds(CacheIds, Database.meat)
+			enableIds(CacheIds, Database.cooking.meat)
 			cooking_ignores["meat"] = true
 		end
 		if self.db.profile.split_fish then
-			enableIds(CacheIds, Database.fish)
+			enableIds(CacheIds, Database.cooking.fish)
 			cooking_ignores["fish"] = true
 		end
 		if self.db.profile.split_reagents then
-			enableIds(CacheIds, Database.reagents)
+			enableIds(CacheIds, Database.cooking.reagents)
 			cooking_ignores["reagents"] = true
 		end
 
 		for i, v in ipairs(Database.cooking) do
 			if not cooking_ignores[i] then
-				enableIds(CacheIds, v)
+				local c = v
+				-- override split category with cooking
+				c.category = Database.cooking
+				enableIds(CacheIds, c)
 			end
 		end
 		wipe(cooking_ignores)
