@@ -31,7 +31,7 @@ local Addon, Private = ...
 -- Lua API
 -----------------------------------------------------------
 local _G = _G
-
+local ipairs = ipairs
 
 -- WoW API
 -----------------------------------------------------------
@@ -92,26 +92,18 @@ end)({
 }, "enUS")
 
 
--- Utility Functions
------------------------------------------------------------
--- Add utility functions like
--- time formatting and similar here.
-
-
 -- Callbacks
 -----------------------------------------------------------
--- Add functions called multiple times
--- by your reactive addon code here.
-
+local function enableIds(dict, id_list)
+	for _, v in ipairs(id_list) do
+		dict[v] = true
+	end
+end
 
 -- Constants
 -----------------------------------------------------------
-FILTER_NAME = "Dragonflight Crafting"
-
-
---------------------------------------------------------------------------------
--- Filter Setup
---------------------------------------------------------------------------------
+local CacheIds
+local Database = Private.Database
 
 -- AdiBags namespace
 -----------------------------------------------------------
