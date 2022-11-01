@@ -1,0 +1,75 @@
+name: "🐛 Bug Report"
+description: Report an issue to help us improve this addon
+title: '[BUG]'
+labels: 'bug, untriaged'
+assignees: 'lucasvienna'
+
+body:
+- type: textarea
+  attributes:
+    label: Description
+    description: What broke, and how should it work instead?
+  validations:
+    required: true
+
+- type: input
+  attributes:
+    label: Addon Version
+    description: |
+      Check the CurseForge or Wago app, or whatever addon manager you use. Otherwise, you can check the `## Version:` field in the TOC file.
+    placeholder: "v1.3.0"
+  validations:
+    required: true
+
+- type: dropdown
+  id: flavor
+  attributes:
+    label: World of Warcraft Flavor
+    description: What version of World of Warcraft are are you running?
+    options:
+      - Retail (Dragonflight)
+      - Classic Era
+      - The Burning Crusade
+      - Wrath of the Lich King
+      - Beta / PTR
+  validations:
+    required: true
+
+- type: checkboxes
+  id: testing
+  attributes:
+    label: Tested with only AdiBags_DFCrafting
+    description: Did you try having AdiBags and AdiBags_DFCrafting as the only enabled addons and everything else (especially other AdiBags plugins) disabled?
+    options:
+      - label: "Yes"
+      - label: "No"
+  validations:
+    required: true
+
+- type: textarea
+  attributes:
+    label: Lua Error
+    description: |
+      Do you have an error log of what happened? If you don't see any errors, make sure that error reporting is enabled (`/console scriptErrors 1`) or install [BugSack](https://www.curseforge.com/wow/addons/bugsack) & [BugGrabber](https://www.curseforge.com/wow/addons/bug-grabber), yes both are needed.
+  validations:
+    required: false
+
+- type: textarea
+  attributes:
+    label: Reproduction Steps
+    description: Please list out the steps to reproduce your bug.
+    placeholder: |
+      1. Go to '...'
+      2. Click on '....'
+      3. Scroll down to '....'
+      4. See error
+  validations:
+    required: true
+
+- type: textarea
+  attributes:
+    label: Screenshots
+    description: If applicable, add screenshots to help explain your problem.
+    placeholder: Click here to attach your screenshots via the editor button in the top right.
+  validations:
+    required: false

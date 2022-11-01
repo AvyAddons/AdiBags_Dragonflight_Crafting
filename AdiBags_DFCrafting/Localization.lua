@@ -111,7 +111,7 @@ end)({
         ["Move Treasure Sacks into their own category"] = true,
         ["Move Fortune Cards"] = true,
         ["Move Fortune Cards into their own category"] = true,
-        
+
         ["Alchemy"] = true,
         ["Cloth"] = true,
         ["Cooking"] = true,
