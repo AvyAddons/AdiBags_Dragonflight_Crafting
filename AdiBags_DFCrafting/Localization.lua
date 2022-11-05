@@ -72,12 +72,19 @@ end)({
         ["Dragonflight Crafting"] = true, -- uiName
         ["Put Dragonflight Crafting items and Reagents into their own categories."] = true, -- uiDesc
 
+        -- Settings sections
+        ["Crafting"] = true,
+        ["Gathering"] = true,
+        ["Miscellaneous"] = true,
+
+        -- Settings toggles
         ["Move Alchemy"] = true,
         ["Move alchemical trade goods into their own category"] = true,
         ["Move Cloth"] = true,
         ["Move cloth and fabric trade goods into their own category"] = true,
         ["Move Cooking"] = true,
         ["Move cooking trade goods into their own category"] = true,
+        ["Split Cooking"] = true,
         ["Move Tuskarr Feast"] = true,
         ["Move Tuskarr feast reagents into their own category"] = true,
         ["Move Ingredients"] = true,
@@ -112,6 +119,7 @@ end)({
         ["Move Fortune Cards"] = true,
         ["Move Fortune Cards into their own category"] = true,
 
+        -- Categories
         ["Alchemy"] = true,
         ["Cloth"] = true,
         ["Cooking"] = true,

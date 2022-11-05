@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file. Be aware th
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Added
+- Filter now returns both section and category
+
+### Fixed
+- Cooking splits now correctly split
+- Cache is now faster on first load, and doesn't rebuild as often
+
+### Changed
+- Updated in-game description of this filter
+
+### Removed
+- Lots of dead code related to standalone addon usage (we're a plugin for AdiBags)
+
 ## [0.0.1-alpha.4] 2022-10-29
 ### Added
 - Initial release

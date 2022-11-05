@@ -30,6 +30,7 @@ local _, addon = ...
     name = "string",
     desc = "string",
     category = "string",
+    section = "string"|nil,
     items = { 12345, 12346 }
 }]]
 
@@ -88,7 +89,8 @@ addon.db = {
         tuskarr_feast = {
             name = "Move Tuskarr Feast",
             desc = "Move Tuskarr feast reagents into their own category",
-            category = "Tuskarr Feast",
+            section = "Tuskarr Feast",
+            category = "Cooking",
             items = {
                 199105, -- Ancheevy
                 199212, -- Clubfish
@@ -113,7 +115,8 @@ addon.db = {
         ingredients = {
             name = "Move Ingredients",
             desc = "Move cooking ingredients into their own category",
-            category = "Ingredients",
+            section = "Ingredients",
+            category = "Cooking",
             items = {
                 197757, -- Assorted Exotic Spices
                 197752, -- Conveniently Packaged Ingredients
@@ -128,7 +131,8 @@ addon.db = {
         meat = {
             name = "Move Meat",
             desc = "Move meat trade goods into their own category",
-            category = "Meat",
+            section = "Meat",
+            category = "Cooking",
             items = {
                 197745, -- Basilisk Eggs
                 197746, -- Bruffalon Flank
@@ -146,7 +150,8 @@ addon.db = {
         fish = {
             name = "Move Fish",
             desc = "Move fish trade goods into their own category",
-            category = "Fish",
+            section = "Fish",
+            category = "Cooking",
             items = {
                 194967, -- Aileron Seamoth
                 194968, -- Cerulean Spinefish
@@ -165,7 +170,8 @@ addon.db = {
         reagents = {
             name = "Move Reagents",
             desc = "Move cooking reagents into their own category",
-            category = "Cooking Reagents",
+            section = "Cooking Reagents",
+            category = "Cooking",
             items = {
                 -- Mining
                 197754, -- Salt Deposit

@@ -27,32 +27,32 @@
 -- Retrive addon folder name, and our local, private namespace.
 local addonName, addon = ...
 local L = addon.L
+local DB = addon.db
 
 -- Lua API
 -----------------------------------------------------------
-local _G = _G
+local pairs = pairs
 local ipairs = ipairs
-
--- WoW API
------------------------------------------------------------
--- Upvalue any WoW functions used here.
 
 -- Callbacks
 -----------------------------------------------------------
 local function enableIds(dict, id_list)
 	--@debug@
-	assert(id_list["items"], "Items list not found")
+	assert(id_list["items"], "Items list not found ")
 	assert(id_list["category"], "Category name not found")
 	--@debug@
 	for _, v in ipairs(id_list.items) do
-		dict[v] = L[id_list.category]
+		dict[v] = {}
+		dict[v]["category"] = L[id_list.category]
+		if L[id_list.section] then
+			dict[v]["section"] = L[id_list.section]
+		end
 	end
 end
 
--- Constants
+-- Private Addon APIs and Tables
 -----------------------------------------------------------
-local CacheIds
-local Database = Private.Database
+local Cache
 
 -- AdiBags namespace
 -----------------------------------------------------------
@@ -91,11 +91,13 @@ function filter:OnInitialize()
 			move_fortune_card = false,
 		},
 	})
+	-- Pre-populate our cache now that we have the settings loaded
+	Cache = self:BuildCache()
 end
 
 function filter:Update()
-	-- Reset filtered IDs
-	CacheIds = nil
+	-- Rebuild the cache with updated settings
+	Cache = self:BuildCache()
 	-- Notify myself that the filtering options have changed
 	self:SendMessage("AdiBags_FiltersChanged")
 end
@@ -112,98 +114,82 @@ end
 -----------------------------------------------------------
 function filter:Filter(slotData)
 	local itemId = slotData.itemId
-	CacheIds = CacheIds or self:StartCache()
 
-	if (itemId and CacheIds[itemId]) then
-		return CacheIds[itemId]
+	if (itemId and Cache[itemId]) then
+		if (Cache[itemId]["section"]) then
+			return Cache[itemId]["section"], Cache[itemId]["category"]
+		end
+		return Cache[itemId]["category"], L["Dragonflight Crafting"]
 	end
-
-	-- TODO: some addons have a tooltip here, for whatever reason
-	-- even if they're tracking by ID and not by tt scanning. 
-	-- figure out why
 end
 
-function filter:StartCache()
-	wipe(CacheIds)
+function filter:BuildCache()
+	local ids = {}
 
 	if self.db.profile.move_alchemy then
-		enableIds(CacheIds, Database.alchemy)
+		enableIds(ids, DB.alchemy)
 	end
 	if self.db.profile.move_cloth then
-		enableIds(CacheIds, Database.cloth)
+		enableIds(ids, DB.cloth)
 	end
 	if self.db.profile.move_cooking then
-		local cooking_ignores = {}
-
-		if self.db.profile.split_tuskarr_feast then
-			enableIds(CacheIds, Database.cooking.tuskarr_feast)
-			cooking_ignores["tuskarr_feast"] = true
-		end
-		if self.db.profile.split_ingredients then
-			enableIds(CacheIds, Database.cooking.ingredients)
-			cooking_ignores["ingredients"] = true
-		end
-		if self.db.profile.split_meat then
-			enableIds(CacheIds, Database.cooking.meat)
-			cooking_ignores["meat"] = true
-		end
-		if self.db.profile.split_fish then
-			enableIds(CacheIds, Database.cooking.fish)
-			cooking_ignores["fish"] = true
-		end
-		if self.db.profile.split_reagents then
-			enableIds(CacheIds, Database.cooking.reagents)
-			cooking_ignores["reagents"] = true
-		end
-
-		for i, v in ipairs(Database.cooking) do
-			if not cooking_ignores[i] then
-				local c = v
-				-- override split category with cooking
-				c.category = Database.cooking
-				enableIds(CacheIds, c)
+		-- iterate all cooking splits
+		for key, value in pairs(DB.cooking) do
+			-- skip the text only values
+			if (type(value) == 'table') then
+				if (self.db.profile["split_"..key] == true) then
+					enableIds(ids, value)
+				else
+					-- override the section, only pass the cooking category
+					local section = value.section
+					value.section = nil
+					enableIds(ids, value)
+					-- if we don't restore this value, subsequent activations will
+					-- return the nil
+					value.section = section
+				end
 			end
 		end
-		wipe(cooking_ignores)
 	end
 	if self.db.profile.move_enchanting then
-		enableIds(CacheIds, Database.enchanting)
+		enableIds(ids, DB.enchanting)
 	end
 	if self.db.profile.move_herbs then
-		enableIds(CacheIds, Database.herbs)
+		enableIds(ids, DB.herbs)
 	end
 	if self.db.profile.move_inscription then
-		enableIds(CacheIds, Database.inscription)
+		enableIds(ids, DB.inscription)
 	end
 	if self.db.profile.move_jewelcrafting then
-		enableIds(CacheIds, Database.jewelcrafting)
+		enableIds(ids, DB.jewelcrafting)
 	end
 	if self.db.profile.move_leather then
-		enableIds(CacheIds, Database.leather)
+		enableIds(ids, DB.leather)
 	end
 	if self.db.profile.move_ore_stone then
-		enableIds(CacheIds, Database.ore_stone)
+		enableIds(ids, DB.ore_stone)
 	end
 	if self.db.profile.move_parts then
-		enableIds(CacheIds, Database.parts)
+		enableIds(ids, DB.parts)
 	end
 	if self.db.profile.move_darkmoon_cards then
-		enableIds(CacheIds, Database.darkmoon_cards)
+		enableIds(ids, DB.darkmoon_cards)
 	end
 	if self.db.profile.move_reagents then
-		enableIds(CacheIds, Database.reagents)
+		enableIds(ids, DB.reagents)
 	end
 	if self.db.profile.move_crafting then
-		enableIds(CacheIds, Database.crafting)
+		enableIds(ids, DB.crafting)
 	end
 	if self.db.profile.move_treasure_sack then
-		enableIds(CacheIds, Database.treasure_sack)
+		enableIds(ids, DB.treasure_sack)
 	end
 	if self.db.profile.move_fortune_card then
-		enableIds(CacheIds, Database.fortune_card)
+		enableIds(ids, DB.fortune_card)
 	end
 
-	return CacheIds
+	addon.CacheIds = ids
+	return ids
 end
 
 -- Filter Options Panel
@@ -211,136 +197,153 @@ end
 function filter:GetOptions()
 	return {
 		-- Setup for the options panel
-		move_alchemy = {
-			name = L[self.db.profile.alchemy.name],
-			desc = L[self.db.profile.alchemy.desc],
-			type = "toggle",
-			order = 0,
+		craft = {
+			name = L["Crafting"],
+			type = "header",
+			order = 5,
 		},
-		move_cloth = {
-			name = L[self.db.profile.cloth.name],
-			desc = L[self.db.profile.cloth.desc],
+		move_alchemy = {
+			name = L[DB.alchemy.name],
+			desc = L[DB.alchemy.desc],
 			type = "toggle",
-			order = 2,
+			order = 10,
+		},
+		move_enchanting = {
+			name = L[DB.enchanting.name],
+			desc = L[DB.enchanting.desc],
+			type = "toggle",
+			order = 11,
+		},
+		move_inscription = {
+			name = L[DB.inscription.name],
+			desc = L[DB.inscription.desc],
+			type = "toggle",
+			order = 12,
+		},
+		move_jewelcrafting = {
+			name = L[DB.jewelcrafting.name],
+			desc = L[DB.jewelcrafting.desc],
+			type = "toggle",
+			order = 13,
+		},
+		move_parts = {
+			name = L[DB.parts.name],
+			desc = L[DB.parts.desc],
+			type = "toggle",
+			order = 14,
 		},
 		move_cooking = {
-			name = L[self.db.profile.cooking.name],
-			desc = L[self.db.profile.cooking.desc],
+			name = L[DB.cooking.name],
+			desc = L[DB.cooking.desc],
 			type = "toggle",
 			width = "double",
-			order = 3,
+			order = 15,
 		},
 		cooking_splits = {
-			name = L[self.db.profile.cooking.name],
-			desc = L[self.db.profile.cooking.desc], -- doesn't seem to get used anyway
+			name = L["Split Cooking"],
+			desc = "", -- doesn't seem to get used anyway
 			type = "group",
 			inline = true,
-			order = 4,
-			disabled = function () return not self.db.profile.move_cooking end,
+			order = 16,
+			disabled = function() return not self.db.profile.move_cooking end,
 			args = {
 				split_tuskarr_feast = {
-					name = L[self.db.profile.cooking.tuskarr_feast.name],
-					desc = L[self.db.profile.cooking.tuskarr_feast.desc],
+					name = L[DB.cooking.tuskarr_feast.name],
+					desc = L[DB.cooking.tuskarr_feast.desc],
 					type = "toggle",
 					order = 10,
 				},
 				split_ingredients = {
-					name = L[self.db.profile.cooking.ingredients.name],
-					desc = L[self.db.profile.cooking.ingredients.desc],
+					name = L[DB.cooking.ingredients.name],
+					desc = L[DB.cooking.ingredients.desc],
 					type = "toggle",
 					order = 20,
 				},
 				split_meat = {
-					name = L[self.db.profile.cooking.meat.name],
-					desc = L[self.db.profile.cooking.meat.desc],
+					name = L[DB.cooking.meat.name],
+					desc = L[DB.cooking.meat.desc],
 					type = "toggle",
 					order = 30,
 				},
 				split_fish = {
-					name = L[self.db.profile.cooking.fish.name],
-					desc = L[self.db.profile.cooking.fish.desc],
+					name = L[DB.cooking.fish.name],
+					desc = L[DB.cooking.fish.desc],
 					type = "toggle",
 					order = 40,
 				},
 				split_reagents = {
-					name = L[self.db.profile.cooking.reagents.name],
-					desc = L[self.db.profile.cooking.reagents.desc],
+					name = L[DB.cooking.reagents.name],
+					desc = L[DB.cooking.reagents.desc],
 					type = "toggle",
 					order = 50,
 				},
 			}
 		},
-		move_enchanting = {
-			name = L[self.db.profile.enchanting.name],
-			desc = L[self.db.profile.enchanting.desc],
-			type = "toggle",
-			order = 6,
-		},
-		move_herbs = {
-			name = L[self.db.profile.herbs.name],
-			desc = L[self.db.profile.herbs.desc],
-			type = "toggle",
-			order = 8,
-		},
-		move_inscription = {
-			name = L[self.db.profile.inscription.name],
-			desc = L[self.db.profile.inscription.desc],
-			type = "toggle",
-			order = 10,
-		},
-		move_jewelcrafting = {
-			name = L[self.db.profile.jewelcrafting.name],
-			desc = L[self.db.profile.jewelcrafting.desc],
-			type = "toggle",
-			order = 12,
-		},
-		move_leather = {
-			name = L[self.db.profile.leather.name],
-			desc = L[self.db.profile.leather.desc],
-			type = "toggle",
-			order = 14,
-		},
-		move_ore_stone = {
-			name = L[self.db.profile.ore_stone.name],
-			desc = L[self.db.profile.ore_stone.desc],
-			type = "toggle",
-			order = 16,
-		},
-		move_parts = {
-			name = L[self.db.profile.parts.name],
-			desc = L[self.db.profile.parts.desc],
-			type = "toggle",
-			order = 18,
-		},
-		move_darkmoon_cards = {
-			name = L[self.db.profile.darkmoon_cards.name],
-			desc = L[self.db.profile.darkmoon_cards.desc],
-			type = "toggle",
+
+		gather = {
+			name = L["Gathering"],
+			type = "header",
 			order = 20,
 		},
-		move_reagents = {
-			name = L[self.db.profile.reagents.name],
-			desc = L[self.db.profile.reagents.desc],
+		move_herbs = {
+			name = L[DB.herbs.name],
+			desc = L[DB.herbs.desc],
+			type = "toggle",
+			order = 21,
+		},
+		move_leather = {
+			name = L[DB.leather.name],
+			desc = L[DB.leather.desc],
 			type = "toggle",
 			order = 22,
 		},
-		move_crafting = {
-			name = L[self.db.profile.crafting.name],
-			desc = L[self.db.profile.crafting.desc],
+		move_ore_stone = {
+			name = L[DB.ore_stone.name],
+			desc = L[DB.ore_stone.desc],
+			type = "toggle",
+			order = 23,
+		},
+		move_cloth = {
+			name = L[DB.cloth.name],
+			desc = L[DB.cloth.desc],
 			type = "toggle",
 			order = 24,
 		},
-		move_treasure_sack = {
-			name = L[self.db.profile.treasure_sack.name],
-			desc = L[self.db.profile.treasure_sack.desc],
+
+		misc = {
+			name = L["Miscellaneous"],
+			type = "header",
+			order = 30,
+		},
+		move_crafting = {
+			name = L[DB.crafting.name],
+			desc = L[DB.crafting.desc],
 			type = "toggle",
-			order = 26,
+			order = 31,
+		},
+		move_reagents = {
+			name = L[DB.reagents.name],
+			desc = L[DB.reagents.desc],
+			type = "toggle",
+			order = 32,
+		},
+		move_darkmoon_cards = {
+			name = L[DB.darkmoon_cards.name],
+			desc = L[DB.darkmoon_cards.desc],
+			type = "toggle",
+			order = 33,
+		},
+		move_treasure_sack = {
+			name = L[DB.treasure_sack.name],
+			desc = L[DB.treasure_sack.desc],
+			type = "toggle",
+			order = 34,
 		},
 		move_fortune_card = {
-			name = L[self.db.profile.fortune_card.name],
-			desc = L[self.db.profile.fortune_card.desc],
+			name = L[DB.fortune_card.name],
+			desc = L[DB.fortune_card.desc],
 			type = "toggle",
-			order = 28,
+			order = 35,
 		},
 	}, AdiBags:GetOptionHandler(self, true, function() return self:Update() end)
 end
