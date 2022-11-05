@@ -70,7 +70,7 @@ end)({
     --   will use the key (to the left) as the value instead!
     ["enUS"] = {
         ["Dragonflight Crafting"] = true, -- uiName
-        ["Categories for all Dragonflight Crafting items and reagents."] = true, -- uiDesc
+        ["Put Dragonflight Crafting items and Reagents into their own categories."] = true, -- uiDesc
 
         ["Move Alchemy"] = true,
         ["Move alchemical trade goods into their own category"] = true,
