@@ -24,21 +24,19 @@
 
 --]]
 -- Retrive addon folder name, and our local, private namespace.
-local _, Private = ...
+local _, addon = ...
 
---[[
-{
+--[[{
     name = "string",
     desc = "string",
     category = "string",
     items = { 12345, 12346 }
-}
-]]
+}]]
 
 
 -- Database
 -----------------------------------------------------------
-Private.Database = {
+addon.db = {
     alchemy = {
         name = "Move Alchemy",
         desc = "Move alchemical trade goods into their own category",

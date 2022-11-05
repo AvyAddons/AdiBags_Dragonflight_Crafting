@@ -24,7 +24,7 @@
 
 --]]
 -- Retrive addon folder name, and our local, private namespace.
-local _, Private = ...
+local _, addon = ...
 
 -- Lua API
 -----------------------------------------------------------
@@ -149,4 +149,4 @@ end)({
     -- * Note that you MUST include a full table for your primary/default locale!
 }, "enUS")
 
-Private.L = L
+addon.L = L
