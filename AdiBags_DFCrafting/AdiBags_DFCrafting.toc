@@ -1,6 +1,6 @@
 ## Interface: 100000
 
-## Title: AdiBags_DFCrafting
+## Title: AdiBags - Dragonflight Crafting
 ## Notes: Filters for Dragonflight Crafting categories in AdiBags. 
 ## Author: Avyiel
 ## Version: @project-version@
