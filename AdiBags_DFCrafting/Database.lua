@@ -63,14 +63,9 @@ addon.db = {
             193936, -- Chronocloth Bolt
             193935, -- Chronocloth Bolt
             193937, -- Chronocloth Bolt
-            193923, -- Decayed Wildercloth
-            193053, -- Duck Feather
-            193924, -- Frostbitten Wildercloth
-            193925, -- Singed Wildercloth
             192096, -- Spool of Wilderthread
             192095, -- Spool of Wilderthread
             192097, -- Spool of Wilderthread
-            193050, -- Tattered Wildercloth
             193929, -- Vibrant Wildercloth Bolt
             193930, -- Vibrant Wildercloth Bolt
             193931, -- Vibrant Wildercloth Bolt
@@ -78,6 +73,11 @@ addon.db = {
             193926, -- Wildercloth Bolt
             193928, -- Wildercloth Bolt
             193927, -- Wildercloth Bolt
+            193923, -- Decayed Wildercloth
+            193924, -- Frostbitten Wildercloth
+            193925, -- Singed Wildercloth
+            193050, -- Tattered Wildercloth
+            193053, -- Duck Feather
         },
     },
 
@@ -199,27 +199,15 @@ addon.db = {
         desc = "Move herbs into their own category",
         category = "Herbs",
         items = {
-            198419, -- Blazing Pigment
-            198418, -- Blazing Pigment
-            198420, -- Blazing Pigment
             191468, -- Bubble Poppy
             191469, -- Bubble Poppy
             191467, -- Bubble Poppy
-            198415, -- Flourishing Pigment
-            198417, -- Flourishing Pigment
-            198416, -- Flourishing Pigment
             191462, -- Hochenblume
             191461, -- Hochenblume
             191460, -- Hochenblume
             191464, -- Saxifrage
             191465, -- Saxifrage
             191466, -- Saxifrage
-            198412, -- Serene Pigment
-            198414, -- Serene Pigment
-            198413, -- Serene Pigment
-            198421, -- Shimmering Pigment
-            198422, -- Shimmering Pigment
-            198423, -- Shimmering Pigment
             191470, -- Writhebark
             191471, -- Writhebark
             191472, -- Writhebark
@@ -247,6 +235,18 @@ addon.db = {
             194755, -- Cosmic Ink
             194754, -- Cosmic Ink
             194756, -- Cosmic Ink
+            198419, -- Blazing Pigment
+            198418, -- Blazing Pigment
+            198420, -- Blazing Pigment
+            198415, -- Flourishing Pigment
+            198417, -- Flourishing Pigment
+            198416, -- Flourishing Pigment
+            198412, -- Serene Pigment
+            198414, -- Serene Pigment
+            198413, -- Serene Pigment
+            198421, -- Shimmering Pigment
+            198422, -- Shimmering Pigment
+            198423, -- Shimmering Pigment
             194825, -- Chirping Rune
             194824, -- Chirping Rune
             194826, -- Chirping Rune
@@ -413,18 +413,18 @@ addon.db = {
             190537, -- Bloody Alloy
             190536, -- Bloody Alloy
             190538, -- Bloody Alloy
-            188658, -- Draconium Ore
-            190311, -- Draconium Ore
-            189143, -- Draconium Ore
             190531, -- Frostfire Alloy
             190530, -- Frostfire Alloy
             190532, -- Frostfire Alloy
-            190313, -- Khaz'gorite Ore
-            190312, -- Khaz'gorite Ore
-            190314, -- Khaz'gorite Ore
             189542, -- Primal Molten Alloy
             189541, -- Primal Molten Alloy
             189543, -- Primal Molten Alloy
+            190313, -- Khaz'gorite Ore
+            190312, -- Khaz'gorite Ore
+            190314, -- Khaz'gorite Ore
+            188658, -- Draconium Ore
+            190311, -- Draconium Ore
+            189143, -- Draconium Ore
             190395, -- Tyrivite Ore
             190394, -- Tyrivite Ore
             190396, -- Tyrivite Ore
