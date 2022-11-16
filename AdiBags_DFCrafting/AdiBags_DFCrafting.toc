@@ -1,4 +1,4 @@
-## Interface: 100000
+## Interface: 100002
 
 ## Title: AdiBags - Dragonflight Crafting
 ## Notes: Filters for Dragonflight Crafting categories in AdiBags. 
