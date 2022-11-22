@@ -40,7 +40,7 @@ local function enableIds(dict, id_list)
 	--@debug@
 	assert(id_list["items"], "Items list not found ")
 	assert(id_list["category"], "Category name not found")
-	--@debug@
+	--@end-debug@
 	for _, v in ipairs(id_list.items) do
 		dict[v] = {}
 		dict[v]["category"] = L[id_list.category]
@@ -137,7 +137,7 @@ function filter:BuildCache()
 		for key, value in pairs(DB.cooking) do
 			-- skip the text only values
 			if (type(value) == 'table') then
-				if (self.db.profile["split_"..key] == true) then
+				if (self.db.profile["split_" .. key] == true) then
 					enableIds(ids, value)
 				else
 					-- override the section, only pass the cooking category
