@@ -110,7 +110,7 @@ end)({
         ["Move Engineering"] = true,
         ["Move engineering parts into their own category"] = true,
         ["Move assorted reagents into their own category"] = true,
-        ["Move Meta Crafting"] = true,
+        ["Move Meta Materials"] = true,
         ["Move crafting meta materials into their own category"] = true,
 
         -- Categories
@@ -130,7 +130,7 @@ end)({
         ["Leather"] = true,
         ["Mining"] = true,
         ["Engineering"] = true,
-        ["Meta Crafting"] = true,
+        ["Meta Materials"] = true,
     },
     ["deDE"] = {},
     ["esES"] = {},
