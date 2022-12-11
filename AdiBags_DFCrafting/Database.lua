@@ -466,48 +466,6 @@ addon.db = {
         },
     },
 
-    darkmoon_cards = {
-        name = "Move Darkmoon Cards",
-        desc = "Move Darkmoon Cards into their own category",
-        category = "Darkmoon Cards",
-        items = {
-            198614, -- Soggy Clump of Darkmoon Cards
-            194827, -- Bundle O' Cards: Dragon Isles
-            194801, -- Ace of Air
-            194809, -- Ace of Earth
-            194785, -- Ace of Fire
-            194793, -- Ace of Frost
-            194808, -- Eight of Air
-            194816, -- Eight of Earth
-            194792, -- Eight of Fire
-            194800, -- Eight of Frost
-            194805, -- Five of Air
-            194813, -- Five of Earth
-            194789, -- Five of Fire
-            194797, -- Five of Frost
-            194804, -- Four of Air
-            194812, -- Four of Earth
-            194788, -- Four of Fire
-            194796, -- Four of Frost
-            194807, -- Seven of Air
-            194815, -- Seven of Earth
-            194799, -- Seven of Fire
-            194791, -- Seven of Frost
-            194806, -- Six of Air
-            194814, -- Six of Earth
-            194790, -- Six of Fire
-            194798, -- Six of Frost
-            194803, -- Three of Air
-            194811, -- Three of Earth
-            194787, -- Three of Fire
-            194795, -- Three of Frost
-            194802, -- Two of Air
-            194810, -- Two of Earth
-            194786, -- Two of Fire
-            194794, -- Two of Frost
-        },
-    },
-
     -- Random shit I don't know where else to put
     reagents = {
         name = "Move Reagents",
@@ -531,14 +489,17 @@ addon.db = {
             191495, -- Primal Convergent
             191494, -- Primal Convergent
             191493, -- Primal Convergent
+            -- Rare
+            193360, -- Centaur's Trophy Necklace
+            191570, -- Dragon's Alchemical Solution
         },
     },
 
     -- Fancy crafting crap
     crafting = {
-        name = "Move Meta Crafting",
+        name = "Move Meta Materials",
         desc = "Move crafting meta materials into their own category",
-        category = "Meta Crafting",
+        category = "Meta Materials",
         items = {
             190456, -- Artisan's Mettle
             190454, -- Primal Chaos
@@ -547,93 +508,4 @@ addon.db = {
             190453, -- Spark of Ingenuity
         },
     },
-
-    treasure_sack = {
-        name = "Move Treasure Sacks",
-        desc = "Move Treasure Sacks into their own category",
-        category = "Treasure Sacks",
-        items = {
-            199341, -- Regurgitated Sack of Swog Treasures
-            202104, -- Weighted Sac of Swog Treasures
-            199342, -- Weighted Sack of Swog Treasures
-            202103, -- Immaculate Sac of Swog Treasures
-            202102, -- Immaculate Sac of Swog Treasures
-            199343, -- Immaculate Sack of Swog Treasures
-        },
-    },
-
-    fortune_card = {
-        name = "Move Fortune Cards",
-        desc = "Move Fortune Cards into their own category",
-        category = "Fortune Cards",
-        items = {
-            199137, -- Fated Fortune Card
-            199156, -- Fated Fortune Card
-            199166, -- Fated Fortune Card
-            199116, -- Fated Fortune Card
-            199124, -- Fated Fortune Card
-            199127, -- Fated Fortune Card
-            199129, -- Fated Fortune Card
-            199141, -- Fated Fortune Card
-            199155, -- Fated Fortune Card
-            199158, -- Fated Fortune Card
-            199165, -- Fated Fortune Card
-            199121, -- Fated Fortune Card
-            199135, -- Fated Fortune Card
-            199146, -- Fated Fortune Card
-            199151, -- Fated Fortune Card
-            199167, -- Fated Fortune Card
-            199114, -- Fated Fortune Card
-            199117, -- Fated Fortune Card
-            199118, -- Fated Fortune Card
-            199119, -- Fated Fortune Card
-            199120, -- Fated Fortune Card
-            199123, -- Fated Fortune Card
-            199125, -- Fated Fortune Card
-            199126, -- Fated Fortune Card
-            199133, -- Fated Fortune Card
-            199134, -- Fated Fortune Card
-            199136, -- Fated Fortune Card
-            199138, -- Fated Fortune Card
-            199139, -- Fated Fortune Card
-            199140, -- Fated Fortune Card
-            199142, -- Fated Fortune Card
-            199143, -- Fated Fortune Card
-            199144, -- Fated Fortune Card
-            199145, -- Fated Fortune Card
-            199147, -- Fated Fortune Card
-            199148, -- Fated Fortune Card
-            199149, -- Fated Fortune Card
-            199150, -- Fated Fortune Card
-            199152, -- Fated Fortune Card
-            199153, -- Fated Fortune Card
-            199154, -- Fated Fortune Card
-            199157, -- Fated Fortune Card
-            199161, -- Fated Fortune Card
-            199162, -- Fated Fortune Card
-            199163, -- Fated Fortune Card
-            199164, -- Fated Fortune Card
-            199168, -- Fated Fortune Card
-            199169, -- Fated Fortune Card
-            194829, -- Fated Fortune Card
-            199160, -- Fated Fortune Card
-            199131, -- Fated Fortune Card
-            199130, -- Fated Fortune Card
-            199159, -- Fated Fortune Card
-            199132, -- Fated Fortune Card
-            199170, -- Fated Fortune Card
-        },
-    },
 }
-
-
---[[
-haven't figures out where these belong to:
-
-193360, -- Centaur's Trophy Necklace
-191570, -- Dragon's Alchemical Solution
-
-194843, -- Explorer's Barding Manuscript
-194842, -- Regal Barding Manuscript
-194838, -- Highland Drake Manuscript: Spined Crest
-]]

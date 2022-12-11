@@ -84,11 +84,8 @@ function filter:OnInitialize()
 			move_leather = true,
 			move_ore_stone = true,
 			move_parts = true,
-			move_darkmoon_cards = false,
 			move_reagents = true,
 			move_crafting = true,
-			move_treasure_sack = false,
-			move_fortune_card = false,
 		},
 	})
 	-- Pre-populate our cache now that we have the settings loaded
@@ -172,20 +169,11 @@ function filter:BuildCache()
 	if self.db.profile.move_parts then
 		enableIds(ids, DB.parts)
 	end
-	if self.db.profile.move_darkmoon_cards then
-		enableIds(ids, DB.darkmoon_cards)
-	end
 	if self.db.profile.move_reagents then
 		enableIds(ids, DB.reagents)
 	end
 	if self.db.profile.move_crafting then
 		enableIds(ids, DB.crafting)
-	end
-	if self.db.profile.move_treasure_sack then
-		enableIds(ids, DB.treasure_sack)
-	end
-	if self.db.profile.move_fortune_card then
-		enableIds(ids, DB.fortune_card)
 	end
 
 	addon.CacheIds = ids
@@ -232,19 +220,31 @@ function filter:GetOptions()
 			type = "toggle",
 			order = 14,
 		},
+		move_crafting = {
+			name = L[DB.crafting.name],
+			desc = L[DB.crafting.desc],
+			type = "toggle",
+			order = 15,
+		},
+		move_reagents = {
+			name = L[DB.reagents.name],
+			desc = L[DB.reagents.desc],
+			type = "toggle",
+			order = 16,
+		},
 		move_cooking = {
 			name = L[DB.cooking.name],
 			desc = L[DB.cooking.desc],
 			type = "toggle",
 			width = "double",
-			order = 15,
+			order = 17,
 		},
 		cooking_splits = {
 			name = L["Split Cooking"],
 			desc = "", -- doesn't seem to get used anyway
 			type = "group",
 			inline = true,
-			order = 16,
+			order = 18,
 			disabled = function() return not self.db.profile.move_cooking end,
 			args = {
 				split_tuskarr_feast = {
@@ -308,42 +308,6 @@ function filter:GetOptions()
 			desc = L[DB.cloth.desc],
 			type = "toggle",
 			order = 24,
-		},
-
-		misc = {
-			name = L["Miscellaneous"],
-			type = "header",
-			order = 30,
-		},
-		move_crafting = {
-			name = L[DB.crafting.name],
-			desc = L[DB.crafting.desc],
-			type = "toggle",
-			order = 31,
-		},
-		move_reagents = {
-			name = L[DB.reagents.name],
-			desc = L[DB.reagents.desc],
-			type = "toggle",
-			order = 32,
-		},
-		move_darkmoon_cards = {
-			name = L[DB.darkmoon_cards.name],
-			desc = L[DB.darkmoon_cards.desc],
-			type = "toggle",
-			order = 33,
-		},
-		move_treasure_sack = {
-			name = L[DB.treasure_sack.name],
-			desc = L[DB.treasure_sack.desc],
-			type = "toggle",
-			order = 34,
-		},
-		move_fortune_card = {
-			name = L[DB.fortune_card.name],
-			desc = L[DB.fortune_card.desc],
-			type = "toggle",
-			order = 35,
 		},
 	}, AdiBags:GetOptionHandler(self, true, function() return self:Update() end)
 end

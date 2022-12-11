@@ -20,10 +20,8 @@ Currently, this addon supports:
 - Mining
 - Engineering
 - Darkmoon Cards
-- Fortune Cards
-- Treasure Sacks
-- Meta Crafting Materials (experimental)
-- Generic Reagents (experimental)
+- Meta Materials
+- Reagents
 
 Cooking trade goods can be further split into a few subclasses.
 
