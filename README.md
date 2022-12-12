@@ -19,7 +19,6 @@ Currently, this addon supports:
 - Leatherworking
 - Mining
 - Engineering
-- Darkmoon Cards
 - Meta Materials
 - Reagents
 
