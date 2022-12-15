@@ -211,6 +211,10 @@ addon.db = {
             191470, -- Writhebark
             191471, -- Writhebark
             191472, -- Writhebark
+            200506, -- Roused Seedling
+            200508, -- Propagating Roused Seedling
+            200509, -- Agitated Roused Seedling
+            200507, -- Decayed Roused Seedling
         },
     },
 
