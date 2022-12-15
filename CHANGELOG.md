@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. Be aware th
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.2.1] 2022-11-22
+### Added
+- Added seedlings to Herb category
+
 ## [1.2.0] 2022-11-22
 ### Removed
 - Moved Treasure Sacks and Fortune Cards to [Dragonflight](https://github.com/AvyAddons/AdiBags_Dragonflight) plugin

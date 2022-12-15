@@ -13,7 +13,7 @@ Currently, this addon supports:
     - Reagents
     - Tuskarr Feasts
 - Enchanting
-- Herbs
+- Herbs & Seedlings
 - Inscription
 - Jewelcrafting
 - Leatherworking
