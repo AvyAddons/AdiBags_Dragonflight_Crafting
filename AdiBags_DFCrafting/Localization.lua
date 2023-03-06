@@ -118,6 +118,7 @@ end)({
 		["Alchemy"] = true,
 		["Cloth"] = true,
 		["Cooking"] = true,
+		["Dragonflight Cooking"] = true,
 		["Tuskarr Feast"] = true,
 		["Ingredients"] = true,
 		["Meat"] = true,

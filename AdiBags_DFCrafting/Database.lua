@@ -89,7 +89,7 @@ addon.db = {
 			name = "Move Tuskarr Feast",
 			desc = "Move Tuskarr feast reagents into their own category",
 			section = "Tuskarr Feast",
-			category = "Cooking",
+			category = "Dragonflight Cooking",
 			order = 10,
 			items = {
 				199105, -- Ancheevy
@@ -115,7 +115,7 @@ addon.db = {
 			name = "Move Ingredients",
 			desc = "Move cooking ingredients into their own category",
 			section = "Ingredients",
-			category = "Cooking",
+			category = "Dragonflight Cooking",
 			order = 20,
 			items = {
 				197757, -- Assorted Exotic Spices
@@ -131,7 +131,7 @@ addon.db = {
 			name = "Move Meat",
 			desc = "Move meat trade goods into their own category",
 			section = "Meat",
-			category = "Cooking",
+			category = "Dragonflight Cooking",
 			order = 30,
 			items = {
 				197745, -- Basilisk Eggs
@@ -150,7 +150,7 @@ addon.db = {
 			name = "Move Fish",
 			desc = "Move fish trade goods into their own category",
 			section = "Fish",
-			category = "Cooking",
+			category = "Dragonflight Cooking",
 			order = 40,
 			items = {
 				194967, -- Aileron Seamoth
@@ -170,7 +170,7 @@ addon.db = {
 			name = "Move Reagents",
 			desc = "Move cooking reagents into their own category",
 			section = "Cooking Reagents",
-			category = "Cooking",
+			category = "Dragonflight Cooking",
 			order = 50,
 			items = {
 				-- Mining
