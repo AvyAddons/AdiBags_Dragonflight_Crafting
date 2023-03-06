@@ -166,7 +166,7 @@ addon.db = {
 				199346, -- Rotten Rimefin Tuna
 			},
 		},
-		reagents = {
+		cooking_reagents = {
 			name = "Move Reagents",
 			desc = "Move cooking reagents into their own category",
 			section = "Cooking Reagents",
