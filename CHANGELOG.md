@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file. Be aware th
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.0.0] 2023-03-06
+### Improved
+- Cooking sections now have a proper parent category: "Dragonflight Cooking"
+
+### Changed
+- BREAKING CHANGE: reworked how options are handled to better support adding new items. This means your current settings will be lost. I'm sorry about that, but it will enable me to add new items more easily and quickly.
+
 ## [1.2.2] 2023-01-25
 ### Changed
 - Bumped TOC to 10.0.5
