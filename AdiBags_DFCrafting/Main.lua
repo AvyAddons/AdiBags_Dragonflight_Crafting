@@ -44,7 +44,7 @@ local function enableIds(dict, id_list)
 	for _, v in ipairs(id_list.items) do
 		dict[v] = {}
 		dict[v]["category"] = L[id_list.category]
-		if L[id_list.section] then
+		if id_list.section then
 			dict[v]["section"] = L[id_list.section]
 		end
 	end
