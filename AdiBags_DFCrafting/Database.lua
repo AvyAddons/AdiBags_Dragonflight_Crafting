@@ -496,6 +496,8 @@ addon.db = {
 			-- Rare
 			193360, -- Centaur's Trophy Necklace
 			191570, -- Dragon's Alchemical Solution
+			-- Epic
+			204215, -- Dormant Primordial Fragment
 		},
 	},
 	-- Fancy crafting crap
