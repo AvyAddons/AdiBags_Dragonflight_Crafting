@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file. Be aware th
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.1.0] 2023-03-28
+### Added
+- New reagents
+
+### Changed
+- Bumped TOC to 10.0.7
+
 ## [2.0.0] 2023-03-06
 ### Improved
 - Cooking sections now have a proper parent category: "Dragonflight Cooking"
