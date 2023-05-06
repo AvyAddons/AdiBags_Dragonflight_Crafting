@@ -190,7 +190,6 @@ addon.db = {
 			194124, -- Vibrant Shard
 			194123, -- Chromatic Dust
 			201584, -- Tyrivite Rod
-			-- 193057, -- 10.0 Placeholder Enchanting Crystal
 		},
 	},
 	herbs = {
@@ -269,6 +268,7 @@ addon.db = {
 		order = 13,
 		items = {
 			200156, -- Amethyzarite Geode
+			194545, -- Prismatic Ore
 			198397, -- Rainbow Pearl
 			192880, -- Crumbled Stone
 			192872, -- Fractured Glass
@@ -403,7 +403,6 @@ addon.db = {
 			197736, -- Finished Prototype Regal Barding
 		},
 	},
-	-- Mining
 	ore_stone = {
 		name = "Move Mining",
 		desc = "Move mining, ore, and stone trade goods into their own category",
@@ -433,11 +432,14 @@ addon.db = {
 			190394, -- Tyrivite Ore
 			190396, -- Tyrivite Ore
 
-			-- Jewelcrafting Prospect
-			194545, -- Prismatic Ore
+			--------------------------------------------------------
+			-- 10.1
+			--------------------------------------------------------
+			204995, -- Shadowed Alloy
+			204994, -- Shadowed Alloy
+			204996, -- Shadowed Alloy
 		},
 	},
-	-- Engineering
 	parts = {
 		name = "Move Engineering",
 		desc = "Move engineering parts into their own category",
@@ -469,7 +471,6 @@ addon.db = {
 			201832, -- Smudged Lens
 		},
 	},
-	-- Random shit I don't know where else to put
 	reagents = {
 		name = "Move Reagents",
 		desc = "Move assorted reagents into their own category",
@@ -498,9 +499,17 @@ addon.db = {
 			191570, -- Dragon's Alchemical Solution
 			-- Epic
 			204215, -- Dormant Primordial Fragment
+			--------------------------------------------------------
+			-- 10.1
+			--------------------------------------------------------
+			204462, -- Dracothyst Shard
+			204463, -- Dracothyst
+			204460, -- Zaralek Glowspores
+			205413, -- Obsidian Cobraskin
+			204464, -- Shadowflame Essence
+			204634, -- Rot Resistant Cauldron
 		},
 	},
-	-- Fancy crafting crap
 	crafting = {
 		name = "Move Meta Materials",
 		desc = "Move crafting meta materials into their own category",
@@ -512,6 +521,21 @@ addon.db = {
 			200686, -- Primal Focus
 			190455, -- Concentrated Primal Focus
 			190453, -- Spark of Ingenuity
+			204717, -- Splintered Spark of Shadowflame
+			204440, -- Spark of Shadowflame
+		},
+	},
+	titan_matrix = {
+		name = "Move Titan Training Matrices",
+		desc = "Move Titan Training Matrices into their own category",
+		category = "Titan Training Matrix",
+		order = 16,
+		items = {
+			198048, -- Titan Training Matrix I
+			198056, -- Titan Training Matrix II
+			198058, -- Titan Training Matrix III
+			204673, -- Titan Training Matrix V
+			198059, -- Titan Training Matrix IV
 		},
 	},
 }
