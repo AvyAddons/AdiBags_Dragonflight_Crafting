@@ -4,6 +4,7 @@
 ## Notes: Filters for Dragonflight Crafting categories in AdiBags.
 ## Author: Avyiel
 ## Version: @project-version@
+## IconTexture: Interface\Icons\inv_misc_bag_05
 
 ## DefaultState: Enabled
 ## Dependencies: AdiBags
