@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. Be aware th
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.2.2] 2023-09-08
+### Changed
+- Bumped TOC to 10.1.7
+
 ## [2.2.1] 2023-05-06
 ### Added
 - Zaralek Caverns materials
