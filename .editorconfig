@@ -16,6 +16,14 @@ trim_trailing_whitespace = true
 [*.md]
 trim_trailing_whitespace = false
 
-[*.yaml]
+[*.toc]
+insert_final_newline = false
+
+[*.{yml,yaml}]
 indent_style = space
-tab_width = 4
+indent_size = 2
+
+# must be spaces for the packager
+[.pkgmeta]
+indent_style = space
+indent_size = 4
