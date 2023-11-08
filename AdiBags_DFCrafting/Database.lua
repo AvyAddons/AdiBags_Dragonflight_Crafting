@@ -508,6 +508,10 @@ addon.db = {
 			205413, -- Obsidian Cobraskin
 			204464, -- Shadowflame Essence
 			204634, -- Rot Resistant Cauldron
+			--------------------------------------------------------
+			-- 10.2
+			--------------------------------------------------------
+			208212, -- Dreaming Essence
 		},
 	},
 	crafting = {
@@ -521,8 +525,16 @@ addon.db = {
 			200686, -- Primal Focus
 			190455, -- Concentrated Primal Focus
 			190453, -- Spark of Ingenuity
+			--------------------------------------------------------
+			-- 10.1
+			--------------------------------------------------------
 			204717, -- Splintered Spark of Shadowflame
 			204440, -- Spark of Shadowflame
+			--------------------------------------------------------
+			-- 10.2
+			--------------------------------------------------------
+			208396, -- Splintered Spark of Dreams
+			206959, -- Spark of Dreams
 		},
 	},
 	titan_matrix = {
