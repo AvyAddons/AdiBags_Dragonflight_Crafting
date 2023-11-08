@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file. Be aware th
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.3.0] 2023-11-08
+### Added
+- Spark of Dreams
+- Dreaming Essence
+
 ## [2.2.3] 2023-11-08
 ### Changed
 - Bumped TOC to 10.2.0
