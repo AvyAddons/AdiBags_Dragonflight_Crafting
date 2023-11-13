@@ -512,6 +512,7 @@ addon.db = {
 			-- 10.2
 			--------------------------------------------------------
 			208212, -- Dreaming Essence
+			210456, -- Dreaming Antler Fragment
 		},
 	},
 	crafting = {
